@@ -15,9 +15,16 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.akodingmama.cleanup"
     },
     "android": {
+      "package": "com.akodingmama.cleanup",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyC9dEnuNjPvu0sQXaDPz2J3QRtTLVr1B2I"
+        }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

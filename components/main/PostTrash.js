@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 
-export default function PostTrash() {
+export default function PostTrash({ navigation }) {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [camera, setCamera] = useState(null);
@@ -59,22 +59,23 @@ export default function PostTrash() {
         />
       </View>
 
-      <View style={styles.buttonContainer}>
-        <Button
-          // style={styles.button}
-          title="Flip Image"
-          onPress={() => {
-            setType(
-              type === Camera.Constants.Type.back
-                ? Camera.Constants.Type.front
-                : Camera.Constants.Type.back
-            );
-          }}
-        ></Button>
-        <Button title="Take Picture" onPress={takePicture} />
-        <Button title="Pick Image From Gallery" onPress={pickImage} />
-        {image && <Image source={{ uri: image }} style={styles.container} />}
-      </View>
+      <Button
+        title="Flip Image"
+        onPress={() => {
+          setType(
+            type === Camera.Constants.Type.back
+              ? Camera.Constants.Type.front
+              : Camera.Constants.Type.back
+          );
+        }}
+      ></Button>
+      <Button title="Take Picture" onPress={takePicture} />
+      <Button title="Pick Image From Gallery" onPress={pickImage} />
+      <Button
+        title="Save"
+        onPress={() => navigation.navigate("Save", { image })}
+      />
+      {image && <Image source={{ uri: image }} style={styles.container} />}
     </View>
   );
 }
@@ -91,17 +92,4 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1,
   },
-  buttonContainer: {
-    flex: 1,
-    backgroundColor: "transparent",
-    flexDirection: "row",
-  },
-  // button: {
-  //   flex: 0.1,
-  //   alignSelf: "flex-end",
-  //   alignItems: "center",
-  // },
-  // text: {
-  //   backgroundColor: "#fff",
-  // },
 });

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUser } from "../redux/actions";
-import { StyleSheet, View, Text } from "react-native";
-import Feed from "./main/Feed";
-import PostTrash from "./main/PostTrash";
+import MapScreen from "./main/MapScreen";
 import Profile from "./main/Profile";
+
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -20,10 +19,10 @@ export class Main extends Component {
   }
   render() {
     return (
-      <Tab.Navigator initialRouteName="Feed" labeled={false}>
+      <Tab.Navigator initialRouteName="MapScreen" labeled={false}>
         <Tab.Screen
-          name="Feed"
-          component={Feed}
+          name="MapScreen"
+          component={MapScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={26} />
@@ -72,12 +71,3 @@ const mapDispatch = (dispatch) => ({
 });
 
 export default connect(mapState, mapDispatch)(Main);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

@@ -3,22 +3,22 @@ import { StyleSheet, Text, View } from "react-native";
 import * as firebase from "firebase";
 import { Provider } from "react-redux";
 import store from "./redux/reducers";
+
+import Landing from "./components/auth/Landing";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+import PostTrash from "./components/main/PostTrash";
+import Save from "./components/main/Save";
 import Main from "./components/Main";
-import "firebase/firestore";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const firebaseConfig = require("./secrets");
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
-import Landing from "./components/auth/Landing";
-import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
-import PostTrash from "./components/main/PostTrash";
 
 const Stack = createStackNavigator(); // routes
 
@@ -80,7 +80,16 @@ class App extends Component {
               component={Main}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="Post" component={PostTrash} />
+            <Stack.Screen
+              name="Post"
+              component={PostTrash}
+              navigation={this.props.navigation}
+            />
+            <Stack.Screen
+              name="Save"
+              component={Save}
+              navigation={this.props.navigation}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
@@ -98,5 +107,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-// https://github.com/SimCoderYoutube/InstagramClone

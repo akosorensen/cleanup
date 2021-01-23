@@ -13,6 +13,18 @@ Sources:
 4. Fetching data from Firestore
    https://stackoverflow.com/questions/52880387/fetching-data-from-firestore
 
+5. React Native: Maps with Direction From Current Location
+   https://medium.com/@princessjanf/react-native-maps-with-direction-from-current-location-ab1a371732c2
+
+6. Introduction to react-native-maps
+   https://blog.logrocket.com/introduction-to-react-native-maps/
+
+7. react-native-maps documentation
+   https://github.com/react-native-maps/react-native-maps
+
+8. Get gps location from image #178
+   https://github.com/react-native-image-picker/react-native-image-picker/issues/178
+
 Errors debugged:
 
 1. "Setting a timer for a long period of time" Warning

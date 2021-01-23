@@ -44,7 +44,7 @@ export default function Save(props) {
         downloadURL,
         caption,
         creation: firebase.firestore.FieldValue.serverTimestamp(),
-        // location: new firebase.firestore.GeoPoint(latitude, longitude),
+        location: new firebase.firestore.GeoPoint(latitude, longitude),
       })
       .then(function () {
         navigation.popToTop(); // This will take us to the beginning part of navigator (in this case, App component) so we can return to the main page

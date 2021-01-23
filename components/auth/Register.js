@@ -57,8 +57,3 @@ class Register extends Component {
 }
 
 export default Register;
-
-// export default function (props) {
-//   const navigation = useNavigation();
-//   return <Register {...props} navigation={navigation} />;
-// }

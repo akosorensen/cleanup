@@ -6,7 +6,9 @@ require("firebase/firebase-storage");
 
 export default function Save(props) {
   const [caption, setCaption] = useState("");
+
   const uri = props.route.params.image;
+  const { latitude, longitude } = props.route.params;
   const { navigation } = props;
 
   const uploadImage = async () => {
@@ -47,10 +49,10 @@ export default function Save(props) {
         location: new firebase.firestore.GeoPoint(latitude, longitude),
       })
       .then(function () {
-        navigation.popToTop(); // This will take us to the beginning part of navigator (in this case, App component) so we can return to the main page
+        navigation.popToTop(); // This will take us to the beginning of navigator (in this case, App component) so we can return to the main page
       });
   };
-
+  // console.log("location from Save: ", latitude, longitude);
   return (
     <View style={{ flex: 1 }}>
       <Image source={{ uri: uri }} />

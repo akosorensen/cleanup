@@ -25,6 +25,9 @@ Sources:
 8. Get gps location from image #178
    https://github.com/react-native-image-picker/react-native-image-picker/issues/178
 
+9. Default Markers example
+   https://github.com/react-native-maps/react-native-maps/blob/master/example/examples/DefaultMarkers.js
+
 Errors debugged:
 
 1. "Setting a timer for a long period of time" Warning
@@ -32,3 +35,7 @@ Errors debugged:
    b. Look for the variable MAX_TIMER_DURATION_MS
    c. Change its value to 10000 \* 1000
    Reference: https://stackoverflow.com/questions/60918903/setting-a-timer-for-a-long-period-of-time-react-native-firebase-issue
+
+2. Removed import {shouldUseActivityState} from 'react-native-screens'
+   ./node_modules/@react-navigation/bottom-tabs/lib/module/views/ResourceSavingScene.js
+   Reference: https://github.com/react-navigation/react-navigation/issues/8993

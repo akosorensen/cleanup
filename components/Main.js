@@ -18,6 +18,8 @@ export class Main extends Component {
     this.props.fetchUser();
   }
   render() {
+    const latitude = 1;
+    const longitude = 1;
     return (
       <Tab.Navigator initialRouteName="MapScreen" labeled={false}>
         <Tab.Screen
@@ -48,7 +50,7 @@ export class Main extends Component {
           listeners={({ navigation }) => ({
             tabPress: (event) => {
               event.preventDefault();
-              navigation.navigate("Post");
+              navigation.navigate("Post", { latitude, longitude });
             },
           })}
           options={{

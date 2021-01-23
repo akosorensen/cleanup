@@ -24,8 +24,3 @@ export function fetchUser() {
       });
   };
 }
-// https://github.com/SimCoderYoutube/InstagramClone/blob/master/frontend/redux/actions/index.js
-
-// Removed import {shouldUseActivityState} from 'react-native-screens'
-// ./node_modules/@react-navigation/bottom-tabs/lib/module/views/ResourceSavingScene.js
-// https://github.com/react-navigation/react-navigation/issues/8993

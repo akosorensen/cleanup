@@ -1,26 +1,32 @@
 import React, { Component } from "react";
 import Map from "./Map";
 import { SafeAreaView } from "react-native";
+import { connect } from "react-redux";
+import { fetchUserMarkers } from "../../redux/actions";
 
 class MapScreen extends Component {
   constructor() {
     super();
     this.state = {
-      latitude: 0,
-      longitude: 0,
-      latitudeDelta: 0.02,
-      longitudeDelta: 0.02,
+      region: {
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      },
     };
   }
   componentDidMount() {
+    this.props.fetchUserMarkers();
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log("position from MapScreen: ", position); // to be deleted
         this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          latitudeDelta: 0.02,
-          longitudeDelta: 0.02,
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          },
         });
       },
       (error) => console.log(error),
@@ -33,13 +39,23 @@ class MapScreen extends Component {
   }
 
   render() {
-    console.log("this.state from MapScreen: ", this.state); // to be deleted
+    const { region } = this.state;
+    const { markers } = this.props;
+
     return (
       <SafeAreaView forceInset={{ top: "always" }}>
-        <Map region={this.state} />
+        <Map region={region} markers={markers} />
       </SafeAreaView>
     );
   }
 }
 
-export default MapScreen;
+const mapState = (store) => ({
+  markers: store.userState.markers,
+});
+
+const mapDispatch = (dispatch) => ({
+  fetchUserMarkers: () => dispatch(fetchUserMarkers()),
+});
+
+export default connect(mapState, mapDispatch)(MapScreen);

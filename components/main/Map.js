@@ -1,30 +1,31 @@
 import React, { useState } from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, View, Image } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 
 const Map = (props) => {
-  const { region } = props;
-  console.log("props from Map: ", props);
+  const { region, markers } = props;
+
   return (
-    <MapView style={styles.map} region={region}>
-      <Marker
-        coordinate={region}
-        title="Your Location"
-        description="Your location description"
-        image={require("../../assets/broom.png")}
-      >
-        <Callout tooltip>
-          {/* <View style={styles.bubble}> */}
-          <Text>Plastic bottles</Text>
-          {/* <Image
-              style={styles.image}
-              source={require("../../assets/Freya.jpg")}
-            /> */}
-          {/* </View> */}
-          {/* <View style={styles.arrowBorder} /> */}
-          {/* <View style={styles.arrow} /> */}
-        </Callout>
-      </Marker>
+    <MapView style={styles.map} region={region} showsUserLocation={true}>
+      {markers.map((marker) => {
+        const { caption, downloadURL, id, location } = marker;
+        let latitude = location.U;
+        let longitude = location.k;
+        return (
+          <Marker
+            key={id}
+            coordinate={{ latitude, longitude }}
+            image={require("../../assets/broom.png")}
+          >
+            <Callout tooltip={false}>
+              <Text>{caption}</Text>
+              <View style={styles.imageContainer}>
+                <Image style={styles.image} source={{ uri: downloadURL }} />
+              </View>
+            </Callout>
+          </Marker>
+        );
+      })}
     </MapView>
   );
 };
@@ -33,36 +34,21 @@ const styles = StyleSheet.create({
   map: {
     height: "100%",
     width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  // bubble: {
-  //   flexDirection: "row",
-  //   alignSelf: "flex-start",
-  //   backgroundColor: "#fff",
-  //   borderRadius: 6,
-  //   borderColor: "#ccc",
-  //   borderWidth: 0.5,
-  //   padding: 15,
-  // },
-  // image: {
-  //   width: 80,
-  //   height: 120,
-  // },
-  // arrow: {
-  //   backgroundColor: "transparent",
-  //   borderColor: "transparent",
-  //   borderTopColor: "#fff",
-  //   borderWidth: 16,
-  //   alignSelf: "center",
-  //   marginTop: -32,
-  // },
-  // arrowBorder: {
-  //   backgroundColor: "transparent",
-  //   borderColor: "transparent",
-  //   borderTopColor: "#007a87",
-  //   borderWidth: 16,
-  //   alignSelf: "center",
-  //   marginTop: "0.5",
-  // },
+  imageContainer: {
+    flex: 1,
+    backgroundColor: "yellow",
+  },
+  image: {
+    backgroundColor: "pink",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 100,
+    width: 100,
+  },
 });
 
 export default Map;

@@ -28,6 +28,9 @@ Sources:
 9. Default Markers example
    https://github.com/react-native-maps/react-native-maps/blob/master/example/examples/DefaultMarkers.js
 
+10. #1 React Native Maps Tutorial | Add Custom Marker & Callout | Dark Mode
+    https://www.youtube.com/watch?v=4N-8RTeQ1fA
+
 Errors debugged:
 
 1. "Setting a timer for a long period of time" Warning

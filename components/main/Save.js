@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { View, TextInput, Image, Button } from "react-native";
+import { View, TextInput, Image, Button, StyleSheet } from "react-native";
 import firebase from "firebase";
+import { fetchUserMarkers } from "../../redux/actions";
+import { connect } from "react-redux";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 
-export default function Save(props) {
+function Save(props) {
   const [caption, setCaption] = useState("");
 
   const uri = props.route.params.image;
@@ -12,7 +14,7 @@ export default function Save(props) {
   const { navigation } = props;
 
   const uploadImage = async () => {
-    const childPath = `post/${
+    const childPath = `posts/${
       firebase.auth().currentUser.uid
     }/${Math.random().toString(36)}`;
 
@@ -39,7 +41,7 @@ export default function Save(props) {
   const savePostData = (downloadURL) => {
     firebase
       .firestore()
-      .collection("post")
+      .collection("posts")
       .doc(firebase.auth().currentUser.uid)
       .collection("userPosts")
       .add({
@@ -49,18 +51,40 @@ export default function Save(props) {
         location: new firebase.firestore.GeoPoint(latitude, longitude),
       })
       .then(function () {
+        props.fetchUserMarkers();
         navigation.popToTop(); // This will take us to the beginning of navigator (in this case, App component) so we can return to the main page
       });
   };
   // console.log("location from Save: ", latitude, longitude);
   return (
-    <View style={{ flex: 1 }}>
-      <Image source={{ uri: uri }} />
+    <View style={styles.container}>
+      <Image style={styles.image} source={{ uri: uri }} />
       <TextInput
-        placeholder="Write a Caption..."
+        styles={styles.descriptionInput}
+        placeholder="Write a Description.."
         onChangeText={(caption) => setCaption(caption)}
       />
       <Button title="Save" onPress={uploadImage} />
     </View>
   );
 }
+
+const mapDispatch = (dispatch) => ({
+  fetchUserMarkers: () => dispatch(fetchUserMarkers()),
+});
+
+export default connect(null, mapDispatch)(Save);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "pink",
+  },
+  image: {
+    flex: 1,
+  },
+  descriptionInput: {
+    backgroundColor: "goldenrod",
+    height: 40,
+  },
+});

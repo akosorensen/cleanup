@@ -30,6 +30,7 @@ Sources:
 
 10. #1 React Native Maps Tutorial | Add Custom Marker & Callout | Dark Mode
     https://www.youtube.com/watch?v=4N-8RTeQ1fA
+    https://github.com/itzpradip/Food-Finder-React-Native-App
 
 11. Context
     https://reactjs.org/docs/context.html

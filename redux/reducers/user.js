@@ -4,6 +4,7 @@ import {
   FETCH_USER_LOCATION,
   UPDATE_USER_LOCATION,
   FETCH_USER_MARKERS,
+  DELETE_USER_MARKER,
 } from "../constants";
 
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
     latitude: 0,
     longitude: 0,
   },
-  markers: [],
+  userMarkers: [],
 };
 
 export const user = (state = initialState, action) => {
@@ -32,10 +33,17 @@ export const user = (state = initialState, action) => {
     case FETCH_USER_MARKERS:
       return {
         ...state,
-        markers: action.markers,
+        userMarkers: action.userMarkers,
       };
     case FETCH_USER_LOCATION:
       return { ...state, currenUserLocation: action.region };
+    case DELETE_USER_MARKER:
+      return {
+        ...state,
+        userMarkers: state.userMarkers.filter(
+          (marker) => marker.id !== action.id
+        ),
+      };
     default:
       return state;
   }

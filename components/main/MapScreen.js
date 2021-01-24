@@ -40,18 +40,18 @@ class MapScreen extends Component {
 
   render() {
     const { region } = this.state;
-    const { markers } = this.props;
+    const { userMarkers } = this.props;
 
     return (
       <SafeAreaView forceInset={{ top: "always" }}>
-        <Map region={region} markers={markers} />
+        <Map region={region} userMarkers={userMarkers} />
       </SafeAreaView>
     );
   }
 }
 
 const mapState = (store) => ({
-  markers: store.userState.markers,
+  userMarkers: store.userState.userMarkers,
 });
 
 const mapDispatch = (dispatch) => ({

@@ -6,6 +6,7 @@ import {
   FETCH_MARKERS,
   FETCH_USER_MARKERS,
   DELETE_MARKER,
+  DELETE_USER_MARKER,
 } from "../constants";
 import firebase from "firebase";
 require("firebase/firestore");
@@ -42,13 +43,13 @@ export function fetchUserMarkers() {
       .collection("userPosts")
       .get()
       .then((snapshot) => {
-        let markers = snapshot.docs.map((doc) => {
+        let userMarkers = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
           return { id, ...data };
         });
-        markers.length
-          ? dispatch({ type: FETCH_USER_MARKERS, markers })
+        userMarkers.length
+          ? dispatch({ type: FETCH_USER_MARKERS, userMarkers })
           : console.log("No markers");
       });
   };
@@ -64,7 +65,7 @@ export function deleteMarker(id) {
       .doc(id)
       .delete()
       .then(() => {
-        dispatch({ type: DELETE_MARKER, id });
+        dispatch({ type: DELETE_USER_MARKER, id });
       });
   };
 }

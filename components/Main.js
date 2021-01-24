@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchUser } from "../redux/actions";
 import MapScreen from "./main/MapScreen";
-import Profile from "./main/Profile";
+import Details from "./main/Details";
 
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -13,7 +13,7 @@ const Empty = () => {
   return null;
 };
 
-export class Main extends Component {
+class Main extends Component {
   constructor() {
     super();
     this.state = {
@@ -57,8 +57,8 @@ export class Main extends Component {
           }}
         />
         <Tab.Screen
-          name="Profile"
-          component={Profile}
+          name="Details"
+          component={Details}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons

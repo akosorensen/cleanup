@@ -7,9 +7,11 @@ import store from "./redux/reducers";
 import Landing from "./components/auth/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import PostTrash from "./components/main/PostTrash";
+import Post from "./components/main/PostTrash";
 import Save from "./components/main/Save";
 import Main from "./components/Main";
+import Details from "./components/main/Details";
+import Map from "./components/main/Map";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -81,8 +83,13 @@ class App extends Component {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="Details"
+              component={Details}
+              options={this.props.navigation}
+            />
+            <Stack.Screen
               name="Post"
-              component={PostTrash}
+              component={Post}
               navigation={this.props.navigation}
             />
             <Stack.Screen

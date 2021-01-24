@@ -5,6 +5,7 @@ import {
   UPDATE_USER_LOCATION,
   FETCH_MARKERS,
   FETCH_USER_MARKERS,
+  DELETE_MARKER,
 } from "../constants";
 import firebase from "firebase";
 require("firebase/firestore");
@@ -49,6 +50,21 @@ export function fetchUserMarkers() {
         markers.length
           ? dispatch({ type: FETCH_USER_MARKERS, markers })
           : console.log("No markers");
+      });
+  };
+}
+
+export function deleteMarker(id) {
+  return (dispatch) => {
+    firebase
+      .firestore()
+      .collection("posts")
+      .doc(firebase.auth().currentUser.uid)
+      .collection("userPosts")
+      .doc(id)
+      .delete()
+      .then(() => {
+        dispatch({ type: DELETE_MARKER, id });
       });
   };
 }

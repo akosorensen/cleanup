@@ -61,6 +61,7 @@ function Save(props) {
       <Image style={styles.image} source={{ uri: uri }} />
       <TextInput
         styles={styles.descriptionInput}
+        numberOfLines={3}
         placeholder="Write a Description.."
         onChangeText={(caption) => setCaption(caption)}
       />

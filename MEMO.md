@@ -31,6 +31,9 @@ Sources:
 10. #1 React Native Maps Tutorial | Add Custom Marker & Callout | Dark Mode
     https://www.youtube.com/watch?v=4N-8RTeQ1fA
 
+11. Context
+    https://reactjs.org/docs/context.html
+
 Errors debugged:
 
 1. "Setting a timer for a long period of time" Warning

@@ -1,27 +1,33 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, View, Image, Button } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import MapView, { Marker, Callout } from "react-native-maps";
+import { useNavigation } from "@react-navigation/native";
+import { deleteMarker } from "../../redux/actions";
+import { connect } from "react-redux";
 
 const Map = (props) => {
+  const navigation = useNavigation();
   const { region, markers } = props;
-
+  console.log("refreshed");
   return (
     <MapView style={styles.map} region={region} showsUserLocation={true}>
       {markers.map((marker) => {
         const { caption, downloadURL, id, location } = marker;
-        let latitude = location.U;
-        let longitude = location.k;
+        const latitude = location.U;
+        const longitude = location.k;
+        const url = marker.downloadURL;
         return (
           <Marker
             key={id}
             coordinate={{ latitude, longitude }}
             image={require("../../assets/broom.png")}
           >
-            <Callout tooltip={false}>
+            <Callout style={styles.calloutContainer} tooltip={false}>
               <Text>{caption}</Text>
-              <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{ uri: downloadURL }} />
-              </View>
+              <TouchableOpacity onPress={() => props.delete(id)}>
+                <Image source={{ uri: url }} style={styles.image} />
+              </TouchableOpacity>
             </Callout>
           </Marker>
         );
@@ -34,6 +40,9 @@ const styles = StyleSheet.create({
   map: {
     height: "100%",
     width: "100%",
+  },
+  calloutContainer: {
+    backgroundColor: "red",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -42,13 +51,13 @@ const styles = StyleSheet.create({
     backgroundColor: "yellow",
   },
   image: {
-    backgroundColor: "pink",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    height: 100,
-    width: 100,
+    height: 250,
+    width: 250,
   },
 });
 
-export default Map;
+const mapDispatch = (dispatch) => ({
+  delete: (id) => dispatch(deleteMarker(id)),
+});
+
+export default connect(null, mapDispatch)(Map);

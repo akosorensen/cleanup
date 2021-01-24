@@ -3,11 +3,13 @@ import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { user } from "./user";
-import { markers } from "./markers";
+// import { markers } from "./markers";
+// import { singleMarker } from "./singleMarker";
 
 const reducers = combineReducers({
   userState: user,
-  markers: markers,
+  // markers,
+  // singleMarker,
 });
 
 const middleware = composeWithDevTools(

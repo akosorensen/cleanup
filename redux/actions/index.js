@@ -1,12 +1,9 @@
 import {
   USER_STATE_CHANGE,
   CLEAR_DATA,
-  FETCH_USER_LOCATION,
-  UPDATE_USER_LOCATION,
-  FETCH_MARKERS,
-  FETCH_USER_MARKERS,
-  DELETE_MARKER,
   DELETE_USER_MARKER,
+  FETCH_SINGLE_MARKER,
+  FETCH_USER_MARKERS,
 } from "../constants";
 import firebase from "firebase";
 require("firebase/firestore");
@@ -55,6 +52,26 @@ export function fetchUserMarkers() {
   };
 }
 
+export function fetchSingleMarker(id) {
+  return (dispatch) => {
+    firebase
+      .firestore()
+      .collection("posts")
+      .doc(firebase.auth().currentUser.uid)
+      .collection("userPosts")
+      .doc(id)
+      .get()
+      .then((snapshot) => {
+        const data = snapshot.data();
+        const id = snapshot.id;
+        const marker = { id, ...data };
+        marker
+          ? dispatch({ type: FETCH_SINGLE_MARKER, marker })
+          : console.log("No marker");
+      });
+  };
+}
+
 export function deleteMarker(id) {
   return (dispatch) => {
     firebase
@@ -69,15 +86,3 @@ export function deleteMarker(id) {
       });
   };
 }
-
-export const fetchUserLocation = () => {
-  return (dispatch) => {
-    dispatch({ type: FETCH_USER_LOCATION });
-  };
-};
-
-export const postUserLocation = (latitude, longitude) => {
-  return (dispatch) => {
-    dispatch({ type: UPDATE_USER_LOCATION, latitude, longitude });
-  };
-};

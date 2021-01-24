@@ -38,7 +38,7 @@ function Save(props) {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
   };
 
-  const savePostData = (downloadURL) => {
+  const savePostData = async (downloadURL) => {
     firebase
       .firestore()
       .collection("posts")

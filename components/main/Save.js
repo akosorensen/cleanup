@@ -53,7 +53,7 @@ function Save(props) {
       })
       .then(function () {
         props.fetchMarkers(zipcode);
-        navigation.popToTop(); // This will take us to the beginning of navigator (in this case, App component) so we can return to the main page
+        navigation.popToTop();
       });
   };
   return (

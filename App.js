@@ -21,7 +21,7 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 
-const Stack = createStackNavigator(); // routes
+const Stack = createStackNavigator();
 
 class App extends Component {
   constructor() {

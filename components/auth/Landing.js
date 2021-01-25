@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Text, View, Button } from "react-native";
+import React from "react";
+import { View, Button } from "react-native";
 
 const Landing = ({ navigation }) => (
   <View style={{ flex: 1, justifyContent: "center" }}>

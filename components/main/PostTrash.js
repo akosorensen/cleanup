@@ -45,26 +45,6 @@ export default function Post(props) {
     }
   };
 
-  // const geoFindMe = () => {
-  //   function success(position) {
-  //     const latitude = position.coords.latitude;
-  //     const longitude = position.coords.longitude;
-  //     setLocation({ latitude, longitude });
-  //   }
-
-  //   function error(error) {
-  //     console.log(error);
-  //   }
-
-  //   const options = {
-  //     enableHighAccuracy: false,
-  //     timeout: 200000,
-  //     maximumAge: 1000,
-  //   };
-
-  //   navigator.geolocation.getCurrentPosition(success, error, options);
-  // };
-
   if (hasCameraPermission === null || hasGalleryPermission === null) {
     return <View />;
   }

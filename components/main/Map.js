@@ -26,10 +26,12 @@ const Map = (props) => {
                   <View>
                     <View style={styles.bubble}>
                       <Text style={styles.caption}>{caption}</Text>
-                      <Image
-                        source={{ uri: downloadURL }}
-                        style={styles.image}
-                      />
+                      <Text style={styles.imageContainer}>
+                        <Image
+                          source={{ uri: downloadURL }}
+                          style={styles.image}
+                        />
+                      </Text>
                     </View>
                   </View>
                   <View style={styles.arrowBorder} />
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   bubble: {
     flexDirection: "column",
     alignSelf: "flex-start",
-    backgroundColor: "#fff",
+    backgroundColor: "pink",
     borderRadius: 6,
     borderColor: "#ccc",
     borderWidth: 0.5,
@@ -81,7 +83,11 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     resizeMode: "cover",
-    // position: "absolute",
+  },
+  imageContainer: {
+    height: 100,
+    width: 100,
+    backgroundColor: "yellow",
   },
 });
 

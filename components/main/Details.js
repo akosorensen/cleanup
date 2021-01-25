@@ -12,21 +12,23 @@ class Details extends Component {
     this.props.delete(this.props.route.params.id);
   }
   fetchDate() {
-    const { seconds } = this.props.singleMarker.creation;
-    const time = new Date(1970, 0, 1);
-    time.setSeconds(seconds);
-    return time.toString().slice(0, -15);
+    if (this.props.singleMarker.creation) {
+      const { seconds } = this.props.singleMarker.creation;
+      const time = new Date(1970, 0, 1);
+      time.setSeconds(seconds);
+      return ` on ${time.toString().slice(0, -15)}`;
+    }
+    return null;
   }
 
   render() {
-    const { singleMarker } = this.props;
-    const { caption, downloadURL, name } = singleMarker;
-    console.log("fetchDate: ", this.fetchDate());
+    const { caption, downloadURL, name } = this.props.singleMarker;
     return (
       <View style={styles.container}>
         <View style={styles.nameContainer}>
           <Text style={styles.name}>
-            Issued by {name} on {this.fetchDate()}
+            Issued by {name}
+            {this.fetchDate()}
           </Text>
         </View>
         <View style={styles.subContainer}>
@@ -39,7 +41,7 @@ class Details extends Component {
           <View style={styles.removeContainer}>
             <Button
               style={styles.button}
-              title="Remove"
+              title="Cleaned!"
               onPress={() => this.handleDelete()}
             />
           </View>

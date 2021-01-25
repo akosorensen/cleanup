@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { View, Button, TextInput } from "react-native";
-
 import firebase from "firebase";
-import { useNavigation } from "@react-navigation/native";
 
 class Register extends Component {
   constructor() {

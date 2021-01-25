@@ -99,12 +99,10 @@ class Main extends Component {
 
 const mapState = (store) => ({
   currentUser: store.userState.currentUser,
-  markers: store.markerState.markers,
 });
 
 const mapDispatch = (dispatch) => ({
   fetchUser: () => dispatch(fetchUser()),
-  fetchMarkers: () => dispatch(fetchMarkers()),
 });
 
 export default connect(mapState, mapDispatch)(Main);

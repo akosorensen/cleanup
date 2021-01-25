@@ -35,7 +35,7 @@ class Details extends Component {
 }
 
 const mapState = (store) => ({
-  singleMarker: store.userState.singleMarker,
+  singleMarker: store.markerState.singleMarker,
 });
 
 const mapDispatch = (dispatch) => ({

@@ -11,11 +11,12 @@ class Register extends Component {
       email: "",
       password: "",
       name: "",
+      zipcode: 0,
     };
     this.onSignUp = this.onSignUp.bind(this);
   }
   onSignUp() {
-    const { email, password, name } = this.state;
+    const { email, password, name, zipcode } = this.state;
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -27,6 +28,7 @@ class Register extends Component {
           .set({
             name,
             email,
+            zipcode,
           });
         console.log(result);
       })
@@ -49,6 +51,10 @@ class Register extends Component {
           placeholder="password"
           secureTextEntry={true}
           onChangeText={(password) => this.setState({ password })}
+        />
+        <TextInput
+          placeholder="zipcode"
+          onChangeText={(zipcode) => this.setState({ zipcode })}
         />
         <Button onPress={this.onSignUp} title="Sign Up" />
       </View>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Image, Button, StyleSheet } from "react-native";
 import firebase from "firebase";
-import { fetchUserMarkers } from "../../redux/actions";
+import { fetchMarkers } from "../../redux/actions";
 import { connect } from "react-redux";
 require("firebase/firestore");
 require("firebase/firebase-storage");
@@ -39,11 +39,18 @@ function Save(props) {
   };
 
   const savePostData = async (downloadURL) => {
+    const zipcode = await firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then((snapshot) => snapshot.data().zipcode);
+
     firebase
       .firestore()
       .collection("posts")
-      .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
+      .doc("location")
+      .collection(zipcode)
       .add({
         downloadURL,
         caption,
@@ -51,7 +58,7 @@ function Save(props) {
         location: new firebase.firestore.GeoPoint(latitude, longitude),
       })
       .then(function () {
-        props.fetchUserMarkers();
+        props.fetchMarkers(zipcode);
         navigation.popToTop(); // This will take us to the beginning of navigator (in this case, App component) so we can return to the main page
       });
   };
@@ -71,7 +78,7 @@ function Save(props) {
 }
 
 const mapDispatch = (dispatch) => ({
-  fetchUserMarkers: () => dispatch(fetchUserMarkers()),
+  fetchMarkers: () => dispatch(fetchMarkers()),
 });
 
 export default connect(null, mapDispatch)(Save);

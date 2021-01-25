@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Map from "./Map";
-import { SafeAreaView, Button, View, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native";
 import { connect } from "react-redux";
-import { fetchUserMarkers } from "../../redux/actions";
-import firebase from "firebase";
+import { fetchMarkers } from "../../redux/actions";
 
 class MapScreen extends Component {
   constructor() {
@@ -19,7 +18,7 @@ class MapScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchUserMarkers();
+    this.props.fetchMarkers();
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
@@ -42,28 +41,22 @@ class MapScreen extends Component {
 
   render() {
     const { region } = this.state;
-    const { userMarkers } = this.props;
-
+    const { markers } = this.props;
+    console.log("markers from MapScreen: ", this.props);
     return (
       <SafeAreaView forceInset={{ top: "always" }}>
-        <Map region={region} userMarkers={userMarkers} />
+        <Map region={region} markers={markers} />
       </SafeAreaView>
-      // <View style={{ flex: 1 }}>
-      //   <View style={{ height: "80%", width: "100%" }}>
-      //     <Map region={region} userMarkers={userMarkers} />
-      //   </View>
-      //   <Button title="Logout" onPress={() => this.onLogout()} />
-      // </View>
     );
   }
 }
 
 const mapState = (store) => ({
-  userMarkers: store.userState.userMarkers,
+  markers: store.markerState.markers,
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchUserMarkers: () => dispatch(fetchUserMarkers()),
+  fetchMarkers: () => dispatch(fetchMarkers()),
 });
 
 export default connect(mapState, mapDispatch)(MapScreen);

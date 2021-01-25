@@ -5,13 +5,13 @@ import { useNavigation } from "@react-navigation/native";
 
 const Map = (props) => {
   const navigation = useNavigation();
-  const { region, userMarkers } = props;
+  const { region, markers } = props;
   console.log("refreshed");
-
+  console.log("markers from Map: ", markers);
   return (
     <MapView style={styles.map} region={region} showsUserLocation={true}>
-      {userMarkers && userMarkers.length
-        ? userMarkers.map((marker) => {
+      {markers && markers.length
+        ? markers.map((marker) => {
             const { caption, downloadURL, id, location } = marker;
             const latitude = location.U;
             const longitude = location.k;

@@ -1,9 +1,8 @@
 import {
   USER_STATE_CHANGE,
   CLEAR_DATA,
-  DELETE_USER_MARKER,
+  DELETE_MARKER,
   FETCH_SINGLE_MARKER,
-  FETCH_USER_MARKERS,
   FETCH_MARKERS,
 } from "../constants";
 import firebase from "firebase";
@@ -32,34 +31,32 @@ export function fetchUser() {
   };
 }
 
-export function fetchUserMarkers() {
-  return (dispatch) => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
-      .get()
-      .then((snapshot) => {
-        let userMarkers = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          const id = doc.id;
-          return { id, ...data };
-        });
-        userMarkers.length
-          ? dispatch({ type: FETCH_USER_MARKERS, userMarkers })
-          : console.log("This user has no markers");
-      });
-  };
-}
+// function fetchZipcode() {
+//   return async () => {
+//     const zipcode = await firebase
+//       .firestore()
+//       .collection("users")
+//       .doc(firebase.auth().currentUser.uid)
+//       .get()
+//       .then((snapshot) => snapshot.data().zipcode);
+//     return zipcode;
+//   };
+// }
 
 export function fetchSingleMarker(id) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    const zipcode = await firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then((snapshot) => snapshot.data().zipcode);
+
     firebase
       .firestore()
       .collection("posts")
-      .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
+      .doc("location")
+      .collection(zipcode)
       .doc(id)
       .get()
       .then((snapshot) => {
@@ -74,25 +71,41 @@ export function fetchSingleMarker(id) {
 }
 
 export function deleteMarker(id) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    const zipcode = await firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then((snapshot) => snapshot.data().zipcode);
+
     firebase
       .firestore()
       .collection("posts")
-      .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
+      .doc("location")
+      .collection(zipcode)
       .doc(id)
       .delete()
       .then(() => {
-        dispatch({ type: DELETE_USER_MARKER, id });
+        dispatch({ type: DELETE_MARKER, id });
       });
   };
 }
 
 export function fetchMarkers() {
-  return (dispatch) => {
+  return async (dispatch) => {
+    const zipcode = await firebase
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .get()
+      .then((snapshot) => snapshot.data().zipcode);
+
     firebase
       .firestore()
       .collection("posts")
+      .doc("location")
+      .collection(zipcode)
       .get()
       .then((snapshot) => {
         let markers = snapshot.docs.map((doc) => {

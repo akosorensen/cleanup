@@ -31,18 +31,6 @@ export function fetchUser() {
   };
 }
 
-// function fetchZipcode() {
-//   return async () => {
-//     const zipcode = await firebase
-//       .firestore()
-//       .collection("users")
-//       .doc(firebase.auth().currentUser.uid)
-//       .get()
-//       .then((snapshot) => snapshot.data().zipcode);
-//     return zipcode;
-//   };
-// }
-
 export function fetchSingleMarker(id) {
   return async (dispatch) => {
     const zipcode = await firebase

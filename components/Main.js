@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMarkers, fetchUser } from "../redux/actions";
+import { fetchUser } from "../redux/actions";
 import MapScreen from "./main/MapScreen";
 import firebase from "firebase";
 
@@ -19,31 +19,25 @@ class Main extends Component {
     this.state = {
       latitude: 0,
       longitude: 0,
-      latitudeDelta: 0.02,
-      longitudeDelta: 0.02,
     };
   }
   onLogout() {
     firebase.auth().signOut();
   }
-  componentDidMount() {
-    this.props.fetchUser();
+  geoFindMe() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 0.02,
-          longitudeDelta: 0.02,
         });
       },
-      (error) => console.log(error),
-      {
-        enableHighAccuracy: false,
-        timeout: 200000,
-        maximumAge: 1000,
-      }
+      (error) => console.log(error)
     );
+  }
+  componentDidMount() {
+    this.props.fetchUser();
+    this.geoFindMe();
   }
   render() {
     const { latitude, longitude } = this.state;
@@ -97,8 +91,8 @@ class Main extends Component {
   }
 }
 
-const mapState = (store) => ({
-  currentUser: store.userState.currentUser,
+const mapState = (state) => ({
+  currentUser: state.userState.currentUser,
 });
 
 const mapDispatch = (dispatch) => ({

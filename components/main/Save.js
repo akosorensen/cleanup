@@ -12,6 +12,7 @@ function Save(props) {
   const uri = props.route.params.image;
   const { latitude, longitude } = props.route.params;
   const { navigation } = props;
+  const { zipcode } = props.currentUser;
 
   const uploadImage = async () => {
     const childPath = `posts/${
@@ -38,14 +39,7 @@ function Save(props) {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
   };
 
-  const savePostData = async (downloadURL) => {
-    const zipcode = await firebase
-      .firestore()
-      .collection("users")
-      .doc(firebase.auth().currentUser.uid)
-      .get()
-      .then((snapshot) => snapshot.data().zipcode);
-
+  const savePostData = (downloadURL) => {
     firebase
       .firestore()
       .collection("posts")
@@ -62,7 +56,6 @@ function Save(props) {
         navigation.popToTop(); // This will take us to the beginning of navigator (in this case, App component) so we can return to the main page
       });
   };
-  // console.log("location from Save: ", latitude, longitude);
   return (
     <View style={styles.container}>
       <TextInput
@@ -77,11 +70,15 @@ function Save(props) {
   );
 }
 
+const mapState = (state) => ({
+  currentUser: state.userState.currentUser,
+});
+
 const mapDispatch = (dispatch) => ({
   fetchMarkers: () => dispatch(fetchMarkers()),
 });
 
-export default connect(null, mapDispatch)(Save);
+export default connect(mapState, mapDispatch)(Save);
 
 const styles = StyleSheet.create({
   container: {
@@ -94,6 +91,5 @@ const styles = StyleSheet.create({
   },
   descriptionInput: {
     backgroundColor: "goldenrod",
-    // height: 40,
   },
 });

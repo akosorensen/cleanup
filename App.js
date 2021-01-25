@@ -11,7 +11,6 @@ import Post from "./components/main/PostTrash";
 import Save from "./components/main/Save";
 import Main from "./components/Main";
 import Details from "./components/main/Details";
-import Map from "./components/main/Map";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";

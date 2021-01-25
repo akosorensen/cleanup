@@ -10,10 +10,10 @@ const reducers = combineReducers({
   markerState: markers,
 });
 
-const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-);
+// const middleware = composeWithDevTools(
+//   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+// );
 
-const store = createStore(reducers, middleware);
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default store;

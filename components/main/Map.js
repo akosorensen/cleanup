@@ -6,8 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 const Map = (props) => {
   const navigation = useNavigation();
   const { region, markers } = props;
-  console.log("refreshed");
-  console.log("markers from Map: ", markers);
   return (
     <MapView style={styles.map} region={region} showsUserLocation={true}>
       {markers && markers.length

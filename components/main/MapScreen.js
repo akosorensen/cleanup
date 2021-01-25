@@ -11,8 +11,8 @@ class MapScreen extends Component {
       region: {
         latitude: 0,
         longitude: 0,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1,
       },
     };
   }
@@ -25,8 +25,8 @@ class MapScreen extends Component {
           region: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1,
           },
         });
       },
@@ -42,7 +42,6 @@ class MapScreen extends Component {
   render() {
     const { region } = this.state;
     const { markers } = this.props;
-    console.log("markers from MapScreen: ", this.props);
     return (
       <SafeAreaView forceInset={{ top: "always" }}>
         <Map region={region} markers={markers} />

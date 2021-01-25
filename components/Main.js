@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchUser } from "../redux/actions";
+import { fetchMarkers, fetchUser } from "../redux/actions";
 import MapScreen from "./main/MapScreen";
-import Details from "./main/Details";
+import firebase from "firebase";
 
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -23,11 +23,13 @@ class Main extends Component {
       longitudeDelta: 0.02,
     };
   }
+  onLogout() {
+    firebase.auth().signOut();
+  }
   componentDidMount() {
     this.props.fetchUser();
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        // console.log("position from Main: ", position); // to be deleted
         this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -57,19 +59,6 @@ class Main extends Component {
           }}
         />
         <Tab.Screen
-          name="Details"
-          component={Details}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="account-circle"
-                color={color}
-                size={26}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
           name="PostTrash"
           component={Empty}
           listeners={({ navigation }) => ({
@@ -84,6 +73,25 @@ class Main extends Component {
             ),
           }}
         />
+        <Tab.Screen
+          name="Logout"
+          component={Empty}
+          listeners={() => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              this.onLogout();
+            },
+          })}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="logout-variant"
+                color={color}
+                size={26}
+              />
+            ),
+          }}
+        />
       </Tab.Navigator>
     );
   }
@@ -91,10 +99,12 @@ class Main extends Component {
 
 const mapState = (store) => ({
   currentUser: store.userState.currentUser,
+  markers: store.markerState.markers,
 });
 
 const mapDispatch = (dispatch) => ({
   fetchUser: () => dispatch(fetchUser()),
+  fetchMarkers: () => dispatch(fetchMarkers()),
 });
 
 export default connect(mapState, mapDispatch)(Main);

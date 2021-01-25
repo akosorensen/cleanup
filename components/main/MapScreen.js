@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Map from "./Map";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, Button, View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { fetchUserMarkers } from "../../redux/actions";
+import firebase from "firebase";
 
 class MapScreen extends Component {
   constructor() {
@@ -16,6 +17,7 @@ class MapScreen extends Component {
       },
     };
   }
+
   componentDidMount() {
     this.props.fetchUserMarkers();
     navigator.geolocation.getCurrentPosition(
@@ -46,6 +48,12 @@ class MapScreen extends Component {
       <SafeAreaView forceInset={{ top: "always" }}>
         <Map region={region} userMarkers={userMarkers} />
       </SafeAreaView>
+      // <View style={{ flex: 1 }}>
+      //   <View style={{ height: "80%", width: "100%" }}>
+      //     <Map region={region} userMarkers={userMarkers} />
+      //   </View>
+      //   <Button title="Logout" onPress={() => this.onLogout()} />
+      // </View>
     );
   }
 }

@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, View, Image, Button } from "react-native";
+import React from "react";
+import { Text, StyleSheet, View, Image } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
-// import { deleteMarker } from "../../redux/actions";
-// import { connect } from "react-redux";
 
 const Map = (props) => {
   const navigation = useNavigation();
@@ -26,7 +24,6 @@ const Map = (props) => {
                 <Callout
                   style={styles.calloutContainer}
                   tooltip={false}
-                  // onPress={() => props.delete(id)}
                   onPress={() => navigation.navigate("Details", { id })}
                 >
                   <View style={styles.calloutContainer}>
@@ -69,11 +66,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-// const mapDispatch = (dispatch) => ({
-//   delete: (id) => dispatch(deleteMarker(id)),
-// });
-
-// export default connect(null, mapDispatch)(Map);
 
 export default Map;

@@ -12,14 +12,23 @@ class Details extends Component {
     this.props.delete(this.props.route.params.id);
   }
   render() {
-    const { navigation, singleMarker } = this.props;
+    const { singleMarker } = this.props;
     const { caption, downloadURL } = singleMarker;
     return (
       <View style={styles.container}>
-        <Text>{caption}</Text>
-        <Image source={{ uri: downloadURL }} style={styles.image} />
-        <Button title="Remove" onPress={() => this.handleDelete()} />
-        <Button title="Go back" onPress={() => navigation.goBack()} />
+        <View style={styles.imageContainer}>
+          <Image source={{ uri: downloadURL }} style={styles.image} />
+        </View>
+        <View style={styles.captionContainer}>
+          <Text style={styles.caption}>{caption}</Text>
+        </View>
+        <View style={styles.removeContainer}>
+          <Button
+            style={styles.button}
+            title="Remove"
+            onPress={() => this.handleDelete()}
+          />
+        </View>
       </View>
     );
   }
@@ -41,11 +50,33 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "pink",
     alignItems: "center",
+  },
+  captionContainer: {
+    backgroundColor: "#ffffd2",
+    padding: 10,
+    width: "100%",
+    alignItems: "center",
+  },
+  caption: {
+    fontSize: 20,
+    color: "#30475e",
+    fontWeight: "500",
+  },
+  imageContainer: {
     justifyContent: "center",
+    margin: 20,
   },
   image: {
-    flex: 1,
+    height: 300,
+    width: 300,
     resizeMode: "cover",
     justifyContent: "center",
+  },
+  removeContainer: {
+    position: "absolute",
+    bottom: 40,
+  },
+  button: {
+    padding: 150,
   },
 });

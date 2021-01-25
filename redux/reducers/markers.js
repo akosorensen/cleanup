@@ -1,13 +1,17 @@
-import { FETCH_MARKERS, DELETE_MARKER } from "../constants";
+import { FETCH_ALL_MARKERS } from "../constants";
 
-const initialState = [];
+const initialState = {
+  markers: [],
+  singleMarker: {},
+};
 
 export const markers = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_MARKERS:
-      return action.markers;
-    case DELETE_MARKER:
-      return state.filter((marker) => marker.id !== action.id);
+    case FETCH_ALL_MARKERS:
+      return {
+        ...state,
+        markers: action.markers,
+      };
     default:
       return state;
   }

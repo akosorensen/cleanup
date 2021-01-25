@@ -58,13 +58,13 @@ function Save(props) {
   // console.log("location from Save: ", latitude, longitude);
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: uri }} />
       <TextInput
         styles={styles.descriptionInput}
         numberOfLines={3}
         placeholder="Write a Description.."
         onChangeText={(caption) => setCaption(caption)}
       />
+      <Image style={styles.image} source={{ uri: uri }} />
       <Button title="Save" onPress={uploadImage} />
     </View>
   );
@@ -82,10 +82,11 @@ const styles = StyleSheet.create({
     backgroundColor: "pink",
   },
   image: {
-    flex: 1,
+    height: 300,
+    width: 300,
   },
   descriptionInput: {
     backgroundColor: "goldenrod",
-    height: 40,
+    // height: 40,
   },
 });

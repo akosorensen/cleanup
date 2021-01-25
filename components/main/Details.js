@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "100%",
     alignItems: "center",
+    justifyContent: "center",
   },
   caption: {
     fontSize: 20,

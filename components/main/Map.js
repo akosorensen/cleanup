@@ -22,21 +22,20 @@ const Map = (props) => {
                 image={require("../../assets/broom.png")}
               >
                 <Callout
-                  style={styles.calloutContainer}
-                  tooltip={false}
+                  tooltip={true}
                   onPress={() => navigation.navigate("Details", { id })}
                 >
-                  <View style={styles.calloutContainer}>
-                    <View>
-                      <Text>{caption}</Text>
-                    </View>
-                    <View>
+                  <View>
+                    <View style={styles.bubble}>
+                      <Text style={styles.caption}>{caption}</Text>
                       <Image
                         source={{ uri: downloadURL }}
                         style={styles.image}
                       />
                     </View>
                   </View>
+                  <View style={styles.arrowBorder} />
+                  <View style={styles.arrow} />
                 </Callout>
               </Marker>
             );
@@ -51,19 +50,40 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  calloutContainer: {
-    backgroundColor: "pink",
-    flex: 1,
+  bubble: {
+    flexDirection: "column",
+    alignSelf: "flex-start",
+    backgroundColor: "#fff",
+    borderRadius: 6,
+    borderColor: "#ccc",
+    borderWidth: 0.5,
+    padding: 15,
   },
-  imageContainer: {
-    height: 100,
-    width: 100,
+  arrow: {
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    borderTopColor: "#fff",
+    borderWidth: 16,
+    alignSelf: "center",
+    marginTop: -32,
+  },
+  arrowBorder: {
+    backgroundColor: "transparent",
+    borderColor: "transparent",
+    borderTopColor: "#007a87",
+    borderWidth: 16,
+    alignSelf: "center",
+    marginTop: -0.5,
+  },
+  caption: {
+    fontSize: 16,
+    marginBottom: 5,
   },
   image: {
     height: 100,
     width: 100,
     resizeMode: "cover",
-    justifyContent: "center",
+    // position: "absolute",
   },
 });
 

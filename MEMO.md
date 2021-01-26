@@ -35,6 +35,9 @@ Sources:
 11. Context
     https://reactjs.org/docs/context.html
 
+12. 5 Things to know about Images in React Native
+    https://medium.com/@wcandillon/5-things-to-know-about-images-react-native-69be41d2a9ee
+
 Errors debugged:
 
 1. "Setting a timer for a long period of time" Warning

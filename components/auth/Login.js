@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Button, TextInput } from "react-native";
+import { View, Button, TextInput, StyleSheet } from "react-native";
 
 import firebase from "firebase";
 
@@ -25,20 +25,56 @@ class Login extends Component {
   }
   render() {
     return (
-      <View>
-        <TextInput
-          placeholder="email"
-          onChangeText={(email) => this.setState({ email })}
-        />
-        <TextInput
-          placeholder="password"
-          secureTextEntry={true}
-          onChangeText={(password) => this.setState({ password })}
-        />
-        <Button onPress={this.onLogin} title="Login" />
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="email"
+            style={styles.caption}
+            numberOfLines={3}
+            onChangeText={(email) => this.setState({ email })}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="password"
+            style={styles.caption}
+            numberOfLines={3}
+            secureTextEntry={true}
+            onChangeText={(password) => this.setState({ password })}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button onPress={this.onLogin} title="Login" />
+        </View>
       </View>
     );
   }
 }
 
 export default Login;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#bbf1fa",
+    alignItems: "center",
+  },
+  inputContainer: {
+    width: "80%",
+  },
+  caption: {
+    fontSize: 20,
+    color: "#284184",
+    fontWeight: "500",
+  },
+  image: {
+    height: 350,
+    width: 350,
+    resizeMode: "cover",
+  },
+  buttonContainer: {
+    justifyContent: "flex-end",
+    width: "40%",
+    marginVertical: 30,
+  },
+});

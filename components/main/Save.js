@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, TextInput, Image, Button, StyleSheet } from "react-native";
 import firebase from "firebase";
 import { fetchMarkers } from "../../redux/actions";
+import { useLocation } from "./Location";
 import { connect } from "react-redux";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 
 function Save(props) {
   const [caption, setCaption] = useState("");
+  const { latitude, longitude, getLocation } = useLocation();
+
+  useEffect(() => {
+    getLocation();
+  });
+
   const uri = props.route.params.image;
-  const { latitude, longitude } = props.route.params;
   const { navigation } = props;
   const { zipcode, name } = props.currentUser;
 
@@ -52,10 +58,11 @@ function Save(props) {
         location: new firebase.firestore.GeoPoint(latitude, longitude),
       })
       .then(function () {
-        props.fetchMarkers(zipcode);
+        props.fetchMarkers();
         navigation.popToTop();
       });
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>

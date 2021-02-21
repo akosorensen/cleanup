@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, StyleSheet, View, Image } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
+import { connect } from "react-redux";
+import { fetchMarkers } from "../../redux/actions";
 
 const Map = (props) => {
   const navigation = useNavigation();
-  const { region, markers } = props;
+
+  useEffect(() => {
+    props.fetchMarkers();
+  });
+
+  const { latitude, longitude } = props.region;
+
+  const region = {
+    latitude,
+    longitude,
+    latitudeDelta: 0.1,
+    longitudeDelta: 0.1,
+  };
+
   return (
     <MapView style={styles.map} region={region} showsUserLocation={true}>
-      {markers && markers.length
-        ? markers.map((marker) => {
+      {props.markers && props.markers.length
+        ? props.markers.map((marker) => {
             const { caption, downloadURL, id, location } = marker;
             const latitude = location.U;
             const longitude = location.k;
@@ -46,6 +61,16 @@ const Map = (props) => {
     </MapView>
   );
 };
+
+const mapState = (store) => ({
+  markers: store.markerState.markers,
+});
+
+const mapDispatch = (dispatch) => ({
+  fetchMarkers: () => dispatch(fetchMarkers()),
+});
+
+export default connect(mapState, mapDispatch)(Map);
 
 const styles = StyleSheet.create({
   map: {
@@ -93,5 +118,3 @@ const styles = StyleSheet.create({
     fontSize: 150,
   },
 });
-
-export default Map;

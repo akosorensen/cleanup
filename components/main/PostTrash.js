@@ -11,7 +11,6 @@ export default function Post(props) {
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   const { navigation } = props;
-  const { latitude, longitude } = props.route.params;
 
   useEffect(() => {
     (async () => {
@@ -77,9 +76,7 @@ export default function Post(props) {
       <Button title="Pick Image From Gallery" onPress={pickImage} />
       <Button
         title="Save"
-        onPress={() =>
-          navigation.navigate("Save", { image, latitude, longitude })
-        }
+        onPress={() => navigation.navigate("Save", { image })}
       />
       {image && <Image source={{ uri: image }} style={styles.container} />}
     </View>

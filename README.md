@@ -6,7 +6,7 @@ _keep your community clean!_<br>
 
 ## Demo
 
-**_Check us out at your-agenda.herokuapp.com_**
+
 
 ## Set Up
 

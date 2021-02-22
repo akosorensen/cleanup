@@ -50,8 +50,6 @@ Cleanup was created with:
 * Firebase
 ```
 
-## People
-
-The original author is:
+## Author
 
 - [Ako Sorensen](https://github.com/akosorensen)

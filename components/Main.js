@@ -54,7 +54,7 @@ const Main = (props) => {
         listeners={() => ({
           tabPress: (event) => {
             event.preventDefault();
-            onLogout();
+            firebase.auth().signOut();
           },
         })}
         options={{

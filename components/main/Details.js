@@ -13,10 +13,8 @@ class Details extends Component {
   }
   fetchDate() {
     if (this.props.singleMarker.creation) {
-      const { seconds } = this.props.singleMarker.creation;
-      const time = new Date(1970, 0, 1);
-      time.setSeconds(seconds);
-      return ` on ${time.toString().slice(0, -15)}`;
+      const time = this.props.singleMarker.creation.toDate();
+      return ` on ${time}`;
     }
     return null;
   }

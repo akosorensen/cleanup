@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchUser } from "../redux/actions";
+import { fetchUser, clearData } from "../redux/actions";
 import MapScreen from "./main/MapScreen";
 import firebase from "firebase";
 
@@ -17,10 +17,6 @@ const Main = (props) => {
   useEffect(() => {
     props.fetchUser();
   });
-
-  const onLogOut = () => {
-    firebase.auth().signOut();
-  };
 
   return (
     <Tab.Navigator initialRouteName="MapScreen" labeled={false}>
@@ -54,7 +50,7 @@ const Main = (props) => {
         listeners={() => ({
           tabPress: (event) => {
             event.preventDefault();
-            onLogOut();
+            firebase.auth().signOut();
           },
         })}
         options={{

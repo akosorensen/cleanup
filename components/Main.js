@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchUser } from "../redux/actions";
 import MapScreen from "./main/MapScreen";
@@ -6,7 +6,6 @@ import firebase from "firebase";
 
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useEffect } from "react/cjs/react.development";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -15,12 +14,13 @@ const Empty = () => {
 };
 
 const Main = (props) => {
-  const onLogout = () => {
-    firebase.auth().signOut();
-  };
   useEffect(() => {
     props.fetchUser();
   });
+
+  const onLogOut = () => {
+    firebase.auth().signOut();
+  };
 
   return (
     <Tab.Navigator initialRouteName="MapScreen" labeled={false}>
@@ -54,7 +54,7 @@ const Main = (props) => {
         listeners={() => ({
           tabPress: (event) => {
             event.preventDefault();
-            firebase.auth().signOut();
+            onLogOut();
           },
         })}
         options={{

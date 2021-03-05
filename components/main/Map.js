@@ -33,6 +33,7 @@ const Map = (props) => {
                 key={id}
                 coordinate={{ latitude, longitude }}
                 image={require("../../assets/broom.png")}
+                tracksViewChanges={false}
               >
                 <Callout
                   tooltip={true}

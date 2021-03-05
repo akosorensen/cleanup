@@ -19,5 +19,10 @@ export function useLocation() {
     );
   };
 
-  return { latitude, longitude, getLocation };
+  const clearLocation = () => {
+    setLatitude(0);
+    setLongitude(0);
+  };
+
+  return { latitude, longitude, getLocation, clearLocation };
 }

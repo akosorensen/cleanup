@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native";
 import { useLocation } from "./Location";
 
 const MapScreen = () => {
-  const { latitude, longitude, getLocation } = useLocation();
+  const { latitude, longitude, getLocation, clearLocation } = useLocation();
   useEffect(() => {
     getLocation();
   });

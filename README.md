@@ -12,6 +12,8 @@ Marker Callouts
 
 Take a Photo or Select from Gallery
 
+![Copy of Untitled](https://user-images.githubusercontent.com/67473473/110152415-b424ee00-7daf-11eb-9bab-836ff32253eb.gif)
+
 ![Copy of Untitled (2)](https://user-images.githubusercontent.com/67473473/110146638-cc453f00-7da8-11eb-8958-184da07603bc.gif)
 
 Remove Markers

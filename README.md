@@ -16,7 +16,8 @@ Marker Callouts
 
 Detail Page
 
-![Screenshot_20210221-110152](https://user-images.githubusercontent.com/67473473/108645137-cf266280-747f-11eb-9c5e-ff944e712286.jpg)
+![Copy of Untitled (2)](https://user-images.githubusercontent.com/67473473/110146638-cc453f00-7da8-11eb-8958-184da07603bc.gif)
+
 
 
 

@@ -12,7 +12,7 @@ Map with Broom Markers
 
 Marker Callouts
 
-![Screenshot_20210221-110143](https://user-images.githubusercontent.com/67473473/108645139-d0f02600-747f-11eb-913b-7ca6403becff.jpg)
+![Copy of Untitled](https://user-images.githubusercontent.com/67473473/110129920-7bc4e600-7d96-11eb-9556-4e46b8c1185d.gif)
 
 Detail Page
 

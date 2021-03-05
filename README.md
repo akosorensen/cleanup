@@ -6,19 +6,17 @@ _keep your community clean!_<br>
 
 ## Demo
 
-Map with Broom Markers
-
-![Screenshot_20210221-110112](https://user-images.githubusercontent.com/67473473/108645134-ccc40880-747f-11eb-8bb0-1663d17cfd6a.jpg)
-
 Marker Callouts
 
 ![Copy of Untitled](https://user-images.githubusercontent.com/67473473/110129920-7bc4e600-7d96-11eb-9556-4e46b8c1185d.gif)
 
-Detail Page
+Take a Photo or Select from Gallery
 
 ![Copy of Untitled (2)](https://user-images.githubusercontent.com/67473473/110146638-cc453f00-7da8-11eb-8958-184da07603bc.gif)
 
+Remove Markers
 
+![Copy of Untitled (3)](https://user-images.githubusercontent.com/67473473/110146792-fc8cdd80-7da8-11eb-8ac3-f5f42ca3a44d.gif)
 
 
 ## Set Up

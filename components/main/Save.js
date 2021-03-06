@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, TextInput, Image, Button, StyleSheet } from "react-native";
+import { View, TextInput, Image, Button } from "react-native";
 import firebase from "firebase";
 import { fetchMarkers } from "../../redux/actions";
+import { styles } from "./Save-style";
 
 import { connect } from "react-redux";
 require("firebase/firestore");
@@ -87,34 +88,3 @@ const mapDispatch = (dispatch) => ({
 });
 
 export default connect(mapState, mapDispatch)(Save);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#bbf1fa",
-    alignItems: "center",
-  },
-  inputContainer: {
-    width: "80%",
-  },
-  caption: {
-    fontSize: 20,
-    color: "#284184",
-    fontWeight: "500",
-  },
-  imageContainer: {
-    justifyContent: "center",
-    margin: 20,
-  },
-  image: {
-    height: 300,
-    width: 300,
-    resizeMode: "cover",
-    justifyContent: "center",
-  },
-  buttonContainer: {
-    justifyContent: "flex-end",
-    width: "40%",
-    marginVertical: 30,
-  },
-});

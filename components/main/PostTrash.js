@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
+import { useLocation } from "./Location";
 
 export default function Post(props) {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
@@ -9,6 +10,7 @@ export default function Post(props) {
   const [camera, setCamera] = useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const { latitude, longitude, getLocation } = useLocation();
 
   const { navigation } = props;
 
@@ -21,6 +23,10 @@ export default function Post(props) {
       setHasGalleryPermission(imageStatus.status === "granted");
     })();
   }, []);
+
+  useEffect(() => {
+    getLocation();
+  }, [latitude, longitude]);
 
   const takePicture = async () => {
     if (camera) {
@@ -76,7 +82,9 @@ export default function Post(props) {
       <Button title="Pick Image From Gallery" onPress={pickImage} />
       <Button
         title="Save"
-        onPress={() => navigation.navigate("Save", { image })}
+        onPress={() =>
+          navigation.navigate("Save", { image, latitude, longitude })
+        }
       />
       {image && <Image source={{ uri: image }} style={styles.container} />}
     </View>

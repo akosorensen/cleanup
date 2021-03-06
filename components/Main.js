@@ -18,6 +18,10 @@ const Main = (props) => {
     props.fetchUser();
   });
 
+  const logout = () => {
+    firebase.auth().signOut();
+  };
+
   return (
     <Tab.Navigator initialRouteName="MapScreen" labeled={false}>
       <Tab.Screen
@@ -50,7 +54,7 @@ const Main = (props) => {
         listeners={() => ({
           tabPress: (event) => {
             event.preventDefault();
-            firebase.auth().signOut();
+            logout();
           },
         })}
         options={{

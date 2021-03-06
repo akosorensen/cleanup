@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, TextInput, Image, Button, StyleSheet } from "react-native";
 import firebase from "firebase";
 import { fetchMarkers } from "../../redux/actions";
-import { useLocation } from "./Location";
+
 import { connect } from "react-redux";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 
 function Save(props) {
   const [caption, setCaption] = useState("");
-  const { latitude, longitude, getLocation } = useLocation();
-
-  useEffect(() => {
-    getLocation();
-  });
 
   const uri = props.route.params.image;
+  const { latitude, longitude } = props.route.params;
   const { navigation } = props;
   const { zipcode, name } = props.currentUser;
 
@@ -45,7 +41,7 @@ function Save(props) {
   };
 
   const savePostData = (downloadURL) => {
-    firebase
+    const data = firebase
       .firestore()
       .collection("posts")
       .doc("location")
@@ -62,7 +58,6 @@ function Save(props) {
         navigation.popToTop();
       });
   };
-
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>

@@ -1,17 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Text, StyleSheet, View, Image } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
-import { connect } from "react-redux";
-import { fetchMarkers } from "../../redux/actions";
 
 const Map = (props) => {
   const navigation = useNavigation();
-
-  useEffect(() => {
-    props.fetchMarkers();
-  });
-
   const { latitude, longitude } = props.region;
 
   const region = {
@@ -63,15 +56,7 @@ const Map = (props) => {
   );
 };
 
-const mapState = (store) => ({
-  markers: store.markerState.markers,
-});
-
-const mapDispatch = (dispatch) => ({
-  fetchMarkers: () => dispatch(fetchMarkers()),
-});
-
-export default connect(mapState, mapDispatch)(Map);
+export default Map;
 
 const styles = StyleSheet.create({
   map: {
